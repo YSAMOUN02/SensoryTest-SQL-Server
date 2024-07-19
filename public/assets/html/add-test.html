@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/Css/backend.css">
+  <link rel="stylesheet" href="/Css/font-khmer.css">
+
+  <!-- Bootstrap CSS -->
+  <link href="/Css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <link rel="icon" href="/image/photo_2024-01-03_10-04-12.jpg" type="image/x-icon">
+
+  <link rel="stylesheet" href="/Css/fonts6/css/all.css">
+  <title>Sensory Test</title>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="nav-bar">
+      <div class="title-system">
+        <img src="/image/photo_2024-01-03_10-04-12.jpg" alt="">
+
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="/html/add-product.html">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-solid fa-cubes"></i><span>Add Product</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-solid fa-box-open"></i><span>View Product</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="/html/add-tester.html">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-solid fa-users-viewfinder"></i><span>Add Tester</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="/html/view-tester.html">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-regular fa-id-card"></i><span>View Tester</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-solid fa-list"></i><span>Add Test</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-solid fa-bars-staggered"></i><span>View Test</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-solid fa-list-check"></i><span>View Result</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-solid fa-gear"></i><span>Setting</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="body-box">
+        <div class="box">
+          <a href="">
+            <div class="sub-box">
+              <div class="box-item">
+                <i class="fa-solid fa-right-from-bracket"></i><span>Log Out</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="dashboard">
+      <div class="title-page">
+        <span>Test for Testing</span>
+      </div>
+      <div class="dashboard-body">
+        <div class="dashboard-body-sub">
+          <form action="">
+
+            <div class="row mt-3">
+              <div class="sub-left">
+                <label for="">Test Title</label>
+                <input class="form-control" type="text">
+              </div>
+              <div class="sub-right">
+                <label for="">Test Status</label>
+                <select name="" class="form-control" id="">
+                  <option value="">Active</option>
+                  <option value="">Finished</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="sub-left">
+                <label for="">For Date</label>
+                <input type="date" class="form-control">
+              </div>
+              <div class="sub-right">
+
+              </div>
+            </div>
+
+
+            <div class="row mt-3">
+              <div class="sub-left">
+                <label for="">Add Product For Testing</label>
+                <button class="button-add" type="button" onclick="refill_data_table()">...</button>
+              </div>
+              <div class="sub-right">
+                <label for="">Add Method For Testing</label>
+                <button class="button-add" type="button" onclick="refill_data_table_method()">...</button>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="full-sub">
+                <div class="extent-text">
+           
+              </div>
+            </div>
+        </div>
+          <div class="row mt-5">
+            <div class="col-2 mt-3 mb-5"><button>Submit</button></div>
+          </div>
+      </div>
+      <div class="add-product">
+        <div class="sub-add-product">
+          <div class="inner-add-product">
+            <center>
+              <h1>Add Product</h1>
+            </center>
+            <table class="align-middle" id="table-select-product">
+              <tr>
+                <th>Code</th>
+                <th>Item Name</th>
+                <th>Lot No</th>
+                <th>Category</th>
+                <th>Lot Tracking code</th>
+                <th>Remove</th>
+              </tr>
+            </table>
+            <label for="">Select Item For Test</label>
+            <label for=""><span class="text-danger" id="max-product">Max product on selection</span></label>
+            <select name="" class="form-control" onchange="select_data_change()" style="width: 90%;" id="select-option">
+              <option value=""></option>
+            </select>
+            <input type="text" class="form-control" style="width: 90%;" onkeyup="search_data()" id="search-add-product"
+              placeholder="Search....">
+            <button onclick="close_panel_add_product() " type="button">Back</button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="add-method">
+        <div class="sub-add-method">
+          <div class="inner-add-method">
+            <center>
+              <h1>Add Test Method</h1>
+            </center>
+
+            <table class="align-middle" id="table-select-method">
+              <tr>
+                <th>ID</th>
+                <th>Test</th>
+
+                <th width="20%">Remove</th>
+              </tr>
+
+            </table>
+            <label for="">Select Test Method For Test &ensp; </label>
+            <label for=""><span class="text-danger" id="test-max">Test Max</span></label>
+            <label for=""><span class="text-danger" id="test-select-product-first">Select Product First</span></label>
+            <select name="" class="form-control" onchange="method_select()" style="width: 90%;"
+              id="select-method-option">
+              <option value=""></option>
+              <option value="1">Find The Same (ស្វែងរកផលិតផលដែលដូចផលិតផលគោល​ឬ Lot គោល ក្នុងចំណោមផលិតផលផ្សេង)</option>
+              <option value="2">Diferences Test(ស្វែងរកផលិតផលដែលខុស ពី ផលិតផលគោល)</option>
+              <option value="3">Rating (ដាក់ពិន្ទុលើផលិតផលគោល ឬ ផលិតផលផ្សេងទៀត)</option>
+              <option value="4">Ranking (តម្រៀបផលិតផលគោលនិង ផលិតផលផ្សេងទៀត​ តាមចំណាត់ថ្នាក់)</option>
+
+
+            </select>
+
+            <button onclick="close_panel_add_method() " type="button">Back</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https:cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+    <script src="/JS/backend.js"></script>
+
+    <script>
+      refill_option(arr_select_product);
+
+    </script>
+</body>
+
+
+</html>
