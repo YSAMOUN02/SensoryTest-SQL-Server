@@ -35,7 +35,9 @@
                         <td>{{$item->position}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>
-                            <a href="/admin/view/result/tester/choice/id={{$id}}/em={{$item->id_em}}"><button>View</button></a>
+                            {{-- /view/tester/choice/id={id}/tested={tested}/em={em_id} --}}
+                            <a href="/view/tester/choice/id={{$id}}/tested={{$tested}}/em={{$item->id_em}}"><button>View</button></a>
+                       
                         </td>
 
                     </tr>
@@ -47,7 +49,7 @@
         <div class="col-12">
             <div class="align-right">
 
-                <a href="/result/test_id={{$id}}"><button>Back</button></a>
+                <a href="/result/test_id={{$id}}/tested={{$tested}}"><button>Back</button></a>
             </div>
         </div>
     </div>

@@ -113,7 +113,16 @@ Route::get('/test/takepart/{id}/{em_id}', [homepageController ::class, 'test_tak
 Route::get('/result/test_id={id}/tested={qty_tester}', [TestingControll ::class, 'result_show']);
 
 
-Route::get('/result/tester_choice/test_id={id}', [TestingControll ::class, 'tester_choice']);
 
 
-Route::get('/result/tester/test_id={id}', [TestingControll ::class, 'view_all_tester_client']);
+
+Route::get('/result/tester/test_id={id}/tested={tested}', [TestingControll ::class, 'view_all_tester_client']);
+
+
+Route::get('/view/tester/comment/id={id}/tested={tested}', [TestingControll ::class, 'view_all_tester_comment_client']);
+
+
+
+Route::get('/view/tester/choice/id={id}/tested={tested}/em={em_id}', [TestingControll ::class, 'teser_choice_client']);
+
+

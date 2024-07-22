@@ -981,7 +981,7 @@ class TestingControll extends Controller
     }
  }
 
- public function view_all_tester_client($id){
+ public function view_all_tester_client($id,$tested){
     
     
 
@@ -996,13 +996,202 @@ class TestingControll extends Controller
     }
     $test_state = 0;
 
-    return view("frontend.client_tester_list",['id' => $id ,'employee' => $employee ,'test_state' => $test_state ]);
+    return view("frontend.client_tester_list",['id' => $id ,'employee' => $employee ,'test_state' => $test_state,'tested' => $tested ]);
 }
 
 
 
-public function tester_choice(){
+
+
+public function view_all_tester_comment_client($id,$tested){
+    $comment = DB::table("employee_group as EG")
+        ->where("EG.test_id", $id)
+        ->whereNotNull("EG.remark")
+        ->where("EG.remark", "<>", "")
+        ->select("EG.*", DB::raw("FORMAT(EG.created_at ,'yyyy-MM-dd h:mm tt') as created_at") )
+        ->get();
     
+    foreach ($comment as $item) {
+        $item->dob = $this->calculateAge($item->dob);
+    }
+    
+    if ($comment->isEmpty()) {
+        return redirect("/result/test_id={{$id}}/tested={{$tested}}")->with("message-primary", "No Comment on this Test");
+    } else {
+        return view("frontend.client_tester_comment", ['comment' => $comment,'tested'=>$tested]);
+    }
 }
 
+    public function teser_choice_client($id,$tested,$em_id){
+  
+            $test_id = $id;
+          
+            $tester_choice_test2 = null;
+            $rating_user_choice = null;
+            $choice_tester_test4  = null;
+            $tester_choice = null;
+    
+    
+            $test = DB::table("test")
+            ->where("id" ,$test_id)
+            ->select("test.*" ,DB::raw("FORMAT(created_at,'yyyy-MM-dd h:mm tt') as created_at"))
+            ->get();
+            $employee = DB::table("employee_group as em")
+            ->where("em.id_em", $em_id)
+            ->where("em.test_id" , $test_id)
+            ->select("em.serail as serial" , "em.*" ,DB::raw("FORMAT(em.created_at,'yyyy-MM-dd h:mm tt') as created_at"))
+            ->get();
+            foreach($employee as $item){
+                $item->dob = $this->calculateAge($item->dob);
+            }
+                     $test = DB::table("test as T")
+                      ->leftJoin("test_method as TM", "T.id" , "TM.test_group")
+                      ->where("T.id" , $test_id)
+                      ->orderBy("T.id" ,"desc")
+                      ->select("T.*","T.id as TID" ,"TM.*" ,"TM.method_type as type" ,"parameter_id as pid")
+                      ->get();
+    
+                      foreach($test as $item){
+                        if($item->type == 1){
+                            $parameter_test1 = DB::table("parameter")
+                            ->where("id" , $item->pid)
+                            ->get();
+    
+                           }
+                     }
+    
+                    foreach($test as $item){
+                        if($item->type == 2){
+                            $parameter_test2 = DB::table("parameter")
+                            ->where("id" , $item->pid)
+                            ->get();
+    
+                        }
+                    }
+                    foreach($test as $item){
+                     if($item->type == 4){
+                         $parameter_test4 = DB::table("parameter")
+                         ->where("id" , $item->pid)
+                         ->get();
+    
+                     }
+                     }
+                     foreach($test as $item){
+                        if($item->type == 3){
+                            $parameter_test3 = DB::table("parameter")
+                            ->where("id" , $item->pid)
+                            ->get();
+    
+                        }
+                     }
+    
+                 if(empty($parameter_test1)){
+                  $parameter_test1 = "0";
+                 }
+                 else{
+                    //  Result
+                    $test_id = $id;
+                  
+    
+                    $choice_tester_test1 = DB::table("test-result")
+                    ->where("employee_id" , $em_id)
+                    ->where("test_id" ,$test_id)
+                    ->where("method_type" , 1)
+                    ->select("user_select")
+                    ->get();
+    
+                    $tester_choice = 0;
+                    if($parameter_test1[0]->option2 == $choice_tester_test1[0]->user_select){
+                        $tester_choice = 2;
+                    }else if($parameter_test1[0]->option3 == $choice_tester_test1[0]->user_select){
+                        $tester_choice = 3;
+                    }else if($parameter_test1[0]->option4 == $choice_tester_test1[0]->user_select){
+                        $tester_choice = 4;
+                    }
+                    else  {
+                    $tester_choice = 0;
+                    }
+                 }
+                 if(empty($parameter_test2)){
+                  $parameter_test2 = "0";
+                 }
+                 else{
+                       //  Result
+                       $test_id = $id;
+                   
+    
+                       $choice_tester_test2 = DB::table("test-result")
+                       ->where("employee_id" , $em_id)
+                       ->where("test_id" ,$test_id)
+                       ->where("method_type" , 2)
+                       ->select("user_select")
+                       ->get();
+    
+                       $tester_choice_test2 = 0;
+                       if($parameter_test2[0]->option1 == $choice_tester_test2[0]->user_select){
+                           $tester_choice_test2 = 1;
+                       }else if($parameter_test2[0]->option2 == $choice_tester_test2[0]->user_select){
+                            $tester_choice_test2 = 2;
+                       }
+                       else if($parameter_test2[0]->option3 == $choice_tester_test2[0]->user_select){
+                            $tester_choice_test2= 3;
+                        }
+                       else if($parameter_test2[0]->option4 == $choice_tester_test2[0]->user_select){
+                            $tester_choice_test2 = 4;
+                       }
+                       else  {
+                        $tester_choice_test2 = 0;
+                       }
+                 }
+                 if(empty($parameter_test3)){
+                  $parameter_test3 = "0";
+                 }else{
+                    $rating_user_choice = DB::table("rating_test")
+                    ->where("test_id",$test_id)
+                    ->where("employee_id", $em_id)
+                    ->limit(4)
+                    ->get();
+    
+                 }
+    
+                 if(empty($parameter_test4)){
+                  $parameter_test4 = "0";
+                 }else{
+                     $choice_tester_test4 = DB::table("test-result")
+                     ->where("employee_id" , $em_id)
+                     ->where("test_id" ,$test_id)
+                     ->where("method_type" , 4)
+                     ->select("option1", "option2" , "option3" ,"option4")
+                     ->limit(1)
+                     ->get();
+    
+    
+    
+                }
+    
+    
+    
+                $test_state = 1;
+    
+            return view("frontend.client_tester_choice", [
+                "employee" => $employee ,
+                'test_id' => $test_id,
+                "test" => $test,
+                "tested" => $tested,
+                'parameter_test1' => $parameter_test1,
+                'parameter_test2' => $parameter_test2,
+                'parameter_test3' => $parameter_test3,
+                'parameter_test4' => $parameter_test4,
+                'tester_choice' =>  $tester_choice,
+                'tester_choice_test2' => $tester_choice_test2,
+    
+    
+                'rating_user_choice' =>$rating_user_choice,
+                'choice_tester_test4' =>  $choice_tester_test4,
+                'test_state' => $test_state
+            ]);
+        
+    }
 }
+
+

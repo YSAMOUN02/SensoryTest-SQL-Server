@@ -1446,9 +1446,9 @@
         <div class="col-12">
             <div class="align-right">
                 <button type="button" onclick="savelink()">Share Result</button>
-                <a href="/admin/view/tester/comment/{{$id}}"><button type="button">Tester Comment</button></a>
-                <a href="/result/tester/test_id={{$id}}"><button type="button">List Tester</button></a>
-                <a href="/admin/view/test"><button type="button">Back</button></a>
+                <a href="/view/tester/comment/id={{$id}}/tested={{$test[0]->tested_employee}}"><button type="button">Tester Comment</button></a>
+                <a href="/result/tester/test_id={{$id}}/tested={{$test[0]->tested_employee}}"><button type="button">List Tester</button></a>
+                <a href="/"><button type="button">Back</button></a>
             </div>
         </div>
     </div>
@@ -1458,6 +1458,8 @@
 
 <script>
     function savelink(){
+        // http://127.0.0.1:8000/
+        // http://192.168.1.71:8400
         var data = "http://192.168.1.71:8400/result/test_id={{$id}}/tested={{$test[0]->tested_employee}}";
 
             // Create a temporary textarea element to hold the data
