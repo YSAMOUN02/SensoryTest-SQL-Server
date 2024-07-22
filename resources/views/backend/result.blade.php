@@ -1458,7 +1458,7 @@
 
 <script>
     function savelink(){
-        var data = "http://192.168.1.71:8400/result/test_id={{$id}}/title={{$test[0]->title}}";
+        var data = "http://192.168.1.71:8400/result/test_id={{$id}}/tested={{$test[0]->tested_employee}}";
 
             // Create a temporary textarea element to hold the data
             var tempTextarea = document.createElement('textarea');

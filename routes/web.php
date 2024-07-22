@@ -110,7 +110,7 @@ Route::get('/thankgivivng', [homepageController ::class, 'thankgivivng']);
 Route::get('/test/takepart/{id}/{em_id}', [homepageController ::class, 'test_takepath']);
 
 
-Route::get('/result/test_id={id}', [TestingControll ::class, 'result_show']);
+Route::get('/result/test_id={id}/tested={qty_tester}', [TestingControll ::class, 'result_show']);
 
 
 Route::get('/result/tester_choice/test_id={id}', [TestingControll ::class, 'tester_choice']);

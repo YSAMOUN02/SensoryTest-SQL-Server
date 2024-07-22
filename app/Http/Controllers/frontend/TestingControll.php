@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\DB;
 class TestingControll extends Controller
 {
 
-   public function result_show($id){
+   public function result_show(Request $request){
+    $id = $request->id;
+
     // parse_str($idem, $output);
     //Test 1
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -980,7 +982,8 @@ class TestingControll extends Controller
  }
 
  public function view_all_tester_client($id){
-
+    
+    
 
     $employee = DB::table("employee_group as EG")
     ->where("EG.test_id" , $id)
