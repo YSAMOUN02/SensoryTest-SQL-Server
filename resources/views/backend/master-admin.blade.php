@@ -28,6 +28,10 @@
 
 
   <div class="container-fluid">
+    <div class="expand-nav">
+      <button onclick="expand_nav()" ><i class="fa-solid fa-arrows-left-right"></i></button>
+    </div>
+    
     <div class="blur">
         <div class="mid">
           <div class="spinner-border text-secondary" role="status">
@@ -183,4 +187,4 @@
 
 </body>
 
-</html>
+</ht ml>

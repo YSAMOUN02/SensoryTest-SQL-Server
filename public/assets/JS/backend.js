@@ -987,5 +987,16 @@ function append_parameter_ranking(state) {
 
 // View Test___________________________________________________________________________________________________________________________________________________________________
 
+var state_nav = 0;
+function expand_nav(){
+    
+    if(state_nav == 0){
+        document.querySelector('.nav-bar').style.display = 'block';
+        state_nav ++;
+    }else{
+        document.querySelector('.nav-bar').style.display = 'none';
+        state_nav = 0;
+    }
+}
 
 

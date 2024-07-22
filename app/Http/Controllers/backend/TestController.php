@@ -50,7 +50,7 @@ class TestController extends Controller
 
       
 
-        DB::table("rating-test")
+        DB::table("rating_test")
         ->where("test_id",$id)
         ->delete();
         DB::table("test")
