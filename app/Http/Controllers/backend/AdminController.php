@@ -26,7 +26,7 @@ class AdminController extends Controller
         }else{
             return redirect("/admin/login")->with("message-fail", "Invalid Credentail!");
         }
-   
+
     }
 
     public function view_admin(){
@@ -34,27 +34,31 @@ class AdminController extends Controller
 
 
         return view("backend.view-admin",['users' => $users]);
-        
+
     }
     public function admin_logout(){
         Auth::logout();
         return redirect("/admin/login")->with("message-success", "Logged out successfully");
     }
     public function delete_admin(Request $request){
+        if(Auth::user()->id != $request->delete_id){
+            $delete = DB::table("users")
+            ->where("id", $request->delete_id)
+            ->where("id","<>" , Auth::user()->id)
+            ->delete();
 
-
-
-        $delete = DB::table("users")
-        ->where("id", $request->delete_id)
-        ->where("id","<>" , Auth::user()->id)
-        ->delete();
-
-        if($delete){
-            return redirect("/admin/view/admin")->with("message-success","Deleted 1 admin");
+            if($delete){
+                return redirect("/admin/view/admin")->with("message-success","Deleted 1 admin");
+            }
+            else{
+                return redirect("/admin/view/admin")->with("message-fail","Opp! Operation fail!");
+            }
+        }else{
+            return redirect("/admin/view/admin")->with("message-fail","You can't delete your user.");
         }
-        else{
-            return redirect("/admin/view/admin")->with("message-fail","Opp! Operation fail!");
-        }
+
+
+
     }
 
     public function update_admin($id){
@@ -64,7 +68,7 @@ class AdminController extends Controller
         $department = DB::table("department")
         ->get();
         return view("backend.update-admin",['admin' => $admin , 'department' => $department]);
- 
+
     }
     public function update_admin_submit(Request $request){
 
@@ -88,11 +92,11 @@ class AdminController extends Controller
                 if($update){
                     return redirect("/admin/view/admin")->with("message-success" , "Updated Info Admin");
                 }else{
-                    
+
                     return redirect("/admin/view/admin")->with("message-fail" , "Opp! Operation fail!");
                 }
         }else{
-            
+
                 $password = bcrypt($request->input("password"));
 
                 // return $password;
@@ -113,11 +117,11 @@ class AdminController extends Controller
                 if($update){
                     return redirect("/admin/view/admin")->with("message-success" , "Updated Info Admin");
                 }else{
-                    
+
                     return redirect("/admin/view/admin")->with("message-fail" , "Opp! Operation fail!");
                 }
         }
- 
-        
+
+
     }
 }
