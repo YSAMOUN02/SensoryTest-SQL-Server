@@ -17,7 +17,7 @@ class TesterViewerController extends Controller
             $product_group_test2 = null;
 
             if($request->type == 1){
-                $test = DB::table("test-result as TR")
+                $test = DB::table("test_result as TR")
                 ->leftJoin("test_method  as TM" , "TR.parameter_id" , "TM.parameter_id")
                 ->leftJoin("employee_group as EM" , "EM.id_em" , "TR.employee_id" )
                 ->where("EM.test_id" , $id)
@@ -26,7 +26,7 @@ class TesterViewerController extends Controller
                 ->select("EM.id_em as idem" ,"EM.name as em_name", "serail as serial","EM.*" , "TR.user_select" ,"test_title" ,DB::raw("FORMAT(TR.created_at ,'yyyy-MM-dd') as test_date") )
                 ->get();
 
-                $product_group_test1 = DB::table("product-group")
+                $product_group_test1 = DB::table("product_group")
                 ->where("test_id" , $id)
                 ->get();
 
@@ -43,7 +43,7 @@ class TesterViewerController extends Controller
 
             }
             else if($request->type == 2){
-                $test = DB::table("test-result as TR")
+                $test = DB::table("test_result as TR")
                 ->leftJoin("test_method  as TM" , "TR.parameter_id" , "TM.parameter_id")
                 ->leftJoin("employee_group as EM" , "EM.id_em" , "TR.employee_id" )
                 ->where("EM.test_id" , $id)
@@ -52,7 +52,7 @@ class TesterViewerController extends Controller
                 ->select("EM.id_em as idem" ,"EM.name as em_name", "serail as serial", "EM.*" , "TR.user_select" ,"test_title" ,DB::raw("FORMAT(TR.created_at ,'yyyy-MM-dd') as test_date") )
                 ->get();
 
-                $product_group_test1 = DB::table("product-group")
+                $product_group_test1 = DB::table("product_group")
                 ->where("test_id" , $id)
                 ->get();
 
@@ -75,7 +75,7 @@ class TesterViewerController extends Controller
                 ->leftJoin("employee_group as EM" , "EM.id_em" , "TR.employee_id" )
                 ->where("TM.method_type" , 3)
                 ->where("EM.test_id" , $id)
-                ->select("EM.id_em as idem" ,"EM.name as em_name", "EM.serail as serial","EM.*" , "EM.dob", "TR.value as user_select" ,"test_title" ,"value1_option1","value1_option2" ,"value1_option3" ,"value1_option4" , "value1_option5",DB::raw("date(TR.created_at) as test_date") )
+                ->select("EM.id_em as idem" ,"EM.name as em_name", "EM.serail as serial","EM.*" , "EM.dob", "TR.value as user_select" ,"test_title" ,"value1_option1","value1_option2" ,"value1_option3" ,"value1_option4" , "value1_option5",DB::raw("FORMAT(TR.created_at ,'yyyy-MM-dd') as test_date") )
                 ->orderBy("TR.value")
                 ->get();
 
@@ -83,7 +83,7 @@ class TesterViewerController extends Controller
                     $item->dob = $this->calculateAge($item->dob);
                 }
 
-                $product_group_test2 = DB::table("product-group")
+                $product_group_test2 = DB::table("product_group")
                     ->where("test_id" , $id)
                     ->get();
 
@@ -97,7 +97,7 @@ class TesterViewerController extends Controller
             }
             else if($request->type == 4){
                 $test = DB::table("test_method as TM")
-                ->leftJoin("test-result as TR" , "TR.parameter_id" , "TM.parameter_id")
+                ->leftJoin("test_result as TR" , "TR.parameter_id" , "TM.parameter_id")
                 ->leftJoin("employee_group as EM" , "EM.id_em" , "TR.employee_id" )
                 ->where("TM.test_group" , $id)
                 ->where("EM.test_id" , $id)
@@ -113,7 +113,7 @@ class TesterViewerController extends Controller
                 ->where("TM.test_group" , $id)
                 ->select("option1","option2" , "option3" , "option4" , "label1" , "label2" , "label3" , "label4")
                 ->get();
-                $product_group = DB::table("product-group as p")
+                $product_group = DB::table("product_group as p")
                 ->where("test_id" , $id)
                 ->select("p.*" , "p.lot as lot_no" , "p.product_id as id")
                 ->get();
@@ -221,7 +221,7 @@ class TesterViewerController extends Controller
                 $test_id = $request->id;
                 $em_id = $request->idem;
 
-                $choice_tester_test1 = DB::table("test-result")
+                $choice_tester_test1 = DB::table("test_result")
                 ->where("employee_id" , $em_id)
                 ->where("test_id" ,$test_id)
                 ->where("method_type" , 1)
@@ -248,7 +248,7 @@ class TesterViewerController extends Controller
                    $test_id = $request->id;
                    $em_id = $request->idem;
 
-                   $choice_tester_test2 = DB::table("test-result")
+                   $choice_tester_test2 = DB::table("test_result")
                    ->where("employee_id" , $em_id)
                    ->where("test_id" ,$test_id)
                    ->where("method_type" , 2)
@@ -285,7 +285,7 @@ class TesterViewerController extends Controller
              if(empty($parameter_test4)){
               $parameter_test4 = "0";
              }else{
-                 $choice_tester_test4 = DB::table("test-result")
+                 $choice_tester_test4 = DB::table("test_result")
                  ->where("employee_id" , $em_id)
                  ->where("test_id" ,$test_id)
                  ->where("method_type" , 4)
@@ -323,7 +323,7 @@ class TesterViewerController extends Controller
 
     public function delete_test_record(Request $request){
 
-        DB::table('test-result')
+        DB::table('test_result')
         ->where("test_id" , $request->test_id)
         ->where("employee_id",$request->em_id)
         ->delete();
@@ -365,16 +365,16 @@ class TesterViewerController extends Controller
             ->where("EG.remark", "<>", "")
             ->select("EG.*", DB::raw("FORMAT(EG.created_at ,'yyyy-MM-dd h:mm tt') as created_at") )
             ->get();
-        
+
         foreach ($comment as $item) {
             $item->dob = $this->calculateAge($item->dob);
         }
-        
+
         if ($comment->isEmpty()) {
             return redirect("/admin/view/result/{$id}")->with("message-primary", "No Comment on this Test");
         } else {
             return view("backend.tester-comment", ['comment' => $comment]);
         }
     }
-    
+
 }

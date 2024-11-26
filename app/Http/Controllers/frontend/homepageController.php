@@ -37,12 +37,12 @@ class homepageController extends Controller
 
 
 
-     $em_session = DB::table("test-result")
+     $em_session = DB::table("test_result")
      ->where("test_id", $id)
      ->where("employee_id",$employee[0]->id)
      ->count();
 
-    $em_session2 = DB::table("rating-test")
+    $em_session2 = DB::table("rating_test")
     ->where("test_id", $id)
     ->where("employee_id",$employee[0]->id)
     ->count();
@@ -51,7 +51,7 @@ class homepageController extends Controller
         $age = $this->calculateAge($employee[0]->dob);
 
         $test = DB::table("test as T")
-         ->leftJoin("test-method as TM", "T.id" , "TM.test_group")
+         ->leftJoin("test_method as TM", "T.id" , "TM.test_group")
          ->where("T.due_date" , today())
          ->where("T.status", 1)
          ->where("T.id" , $id)
@@ -215,7 +215,7 @@ class homepageController extends Controller
             $product_group = $test_id;
 
 
-            $correct_product = DB::table("test-method")
+            $correct_product = DB::table("test_method")
             ->leftJoin("parameter as p" , "p.id","parameter_id")
             ->where("p.id", $parameter1_id)
             ->select("same_main","main", "method_type", "parameter_id" ,"option1","option2","option3","option4")
@@ -227,7 +227,7 @@ class homepageController extends Controller
             }else{
                 $correction = 0;
             }
-            DB::table("test-result")
+            DB::table("test_result")
             ->insert([
                 'test_id' => $test_id,
                 'product_group_id' => $product_group,
@@ -254,7 +254,7 @@ class homepageController extends Controller
             $parameter2_id = $request->input("parameter2-id");
             $test_id = $request->input("test-id");
             $product_group = $test_id;
-            $correct_product2 = DB::table("test-method")
+            $correct_product2 = DB::table("test_method")
             ->leftJoin("parameter as p" , "p.id" , "parameter_id" )
             ->where("p.id", $parameter2_id)
             ->select("main", "method_type","option1","option2","option3","option4")
@@ -266,7 +266,7 @@ class homepageController extends Controller
             }else{
                 $correction = 0;
             }
-            DB::table("test-result")
+            DB::table("test_result")
             ->insert([
                 'test_id' => $test_id,
                 'product_group_id' => $product_group,
@@ -287,12 +287,12 @@ class homepageController extends Controller
         $user_ranking =$request->input("user-ranking");
         $state_test4 = $request->input("state-test4");
         if($state_test4 == 1){
-       
+
             $pairs = explode(",", $user_ranking);
 
             // Initialize an empty associative array
             $ranking_value = array();
-            
+
             if ($user_ranking == "1") {
                 $rank1 = $request->input("ranksuffle1");
                 $rank2 = $request->input("ranksuffle2");
@@ -314,9 +314,9 @@ class homepageController extends Controller
                 if($rank3 != "" && $rank4 != ""){
                     $user_ranking = "1:".$rank1.",2:".$rank2.",3:".$rank3.",4:".$rank4;
                 }
-                
+
             } else {
-    
+
                 // Loop through each pair and create the associative array
                 foreach ($pairs as $pair) {
                     // Split the pair into key and value using ":"
@@ -341,18 +341,18 @@ class homepageController extends Controller
                 }else{
                     $rank3 = $ranking_value['3'];
                 }
-          
-            }
-          
-            
 
-         
-          
+            }
+
+
+
+
+
 
             $parameter4_id = $request->input("parameter4-id");
             $test_id = $request->input("test-id");
             $product_group = $test_id;
-            $correct_product =  DB::table("test-method as TM")
+            $correct_product =  DB::table("test_method as TM")
             ->leftJoin("parameter as p", "p.id" , "TM.parameter_id")
             ->where("p.id", $parameter4_id)
             ->select("label1", "label2", "label3" , "label4", "method_type")
@@ -361,7 +361,7 @@ class homepageController extends Controller
             $correction = 0;
 
 
-            DB::table("test-result")
+            DB::table("test_result")
             ->insert([
                 'test_id' => $test_id,
                 'product_group_id' => $product_group,
@@ -393,7 +393,7 @@ class homepageController extends Controller
             $value1_option4 =  $request->input("value1_option4");
             $value1_option5 =  $request->input("value1_option5");
 
-            DB::table("rating-test")
+            DB::table("rating_test")
             ->insert([
                 'test_id' =>$test_id,
                 'product_group_id' => $product_group,
@@ -436,7 +436,7 @@ class homepageController extends Controller
                     $value2_option5 =  "";
                 }
 
-                DB::table("rating-test")
+                DB::table("rating_test")
                 ->insert([
                     'test_id' =>$test_id,
                     'product_group_id' => $product_group,
@@ -478,7 +478,7 @@ class homepageController extends Controller
             }else{
                 $value3_option5 =  "";
             }
-            DB::table("rating-test")
+            DB::table("rating_test")
             ->insert([
                 'test_id' =>$test_id,
                 'product_group_id' => $product_group,
@@ -521,7 +521,7 @@ class homepageController extends Controller
             }else{
                 $value4_option5 =  "";
             }
-            DB::table("rating-test")
+            DB::table("rating_test")
             ->insert([
                 'test_id' =>$test_id,
                 'product_group_id' => $product_group,

@@ -25,7 +25,7 @@ class TestController extends Controller
     }
     public function delete_test(Request $request){
         $id = $request->input("delete-id");
-     
+
 
         DB::table("employee-group")
         ->where("test_id" , $id)
@@ -44,11 +44,11 @@ class TestController extends Controller
         ->where("test_group",$id)
         ->delete();
 
-        DB::table("test-result")
+        DB::table("test_result")
         ->where("test_id",$id)
         ->delete();
 
-      
+
 
         DB::table("rating_test")
         ->where("test_id",$id)
@@ -447,7 +447,7 @@ class TestController extends Controller
     function difference_test($request){
 
         $main = $request->input("test2-main");
-        
+
         if(!empty($request->input("test2-option1"))){
             $option1 = $request->input("test2-option1");
         }
@@ -582,7 +582,7 @@ class TestController extends Controller
         ]);
     }
 
-    
+
 }
 
 

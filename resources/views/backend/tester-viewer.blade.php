@@ -230,7 +230,7 @@
                     @if(!empty($item->value1_option5))
                     <td>{{$item->value1_option5}}</td>
 
- 
+
                     @endif
 
                         @if($type == 4)

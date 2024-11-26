@@ -982,8 +982,8 @@ class TestingControll extends Controller
  }
 
  public function view_all_tester_client($id,$tested){
-    
-    
+
+
 
     $employee = DB::table("employee_group as EG")
     ->where("EG.test_id" , $id)
@@ -1010,11 +1010,11 @@ public function view_all_tester_comment_client($id,$tested){
         ->where("EG.remark", "<>", "")
         ->select("EG.*", DB::raw("FORMAT(EG.created_at ,'yyyy-MM-dd h:mm tt') as created_at") )
         ->get();
-    
+
     foreach ($comment as $item) {
         $item->dob = $this->calculateAge($item->dob);
     }
-    
+
     if ($comment->isEmpty()) {
         return redirect("/result/test_id={{$id}}/tested={{$tested}}")->with("message-primary", "No Comment on this Test");
     } else {
@@ -1023,15 +1023,15 @@ public function view_all_tester_comment_client($id,$tested){
 }
 
     public function teser_choice_client($id,$tested,$em_id){
-  
+
             $test_id = $id;
-          
+
             $tester_choice_test2 = null;
             $rating_user_choice = null;
             $choice_tester_test4  = null;
             $tester_choice = null;
-    
-    
+
+
             $test = DB::table("test")
             ->where("id" ,$test_id)
             ->select("test.*" ,DB::raw("FORMAT(created_at,'yyyy-MM-dd h:mm tt') as created_at"))
@@ -1050,22 +1050,22 @@ public function view_all_tester_comment_client($id,$tested){
                       ->orderBy("T.id" ,"desc")
                       ->select("T.*","T.id as TID" ,"TM.*" ,"TM.method_type as type" ,"parameter_id as pid")
                       ->get();
-    
+
                       foreach($test as $item){
                         if($item->type == 1){
                             $parameter_test1 = DB::table("parameter")
                             ->where("id" , $item->pid)
                             ->get();
-    
+
                            }
                      }
-    
+
                     foreach($test as $item){
                         if($item->type == 2){
                             $parameter_test2 = DB::table("parameter")
                             ->where("id" , $item->pid)
                             ->get();
-    
+
                         }
                     }
                     foreach($test as $item){
@@ -1073,7 +1073,7 @@ public function view_all_tester_comment_client($id,$tested){
                          $parameter_test4 = DB::table("parameter")
                          ->where("id" , $item->pid)
                          ->get();
-    
+
                      }
                      }
                      foreach($test as $item){
@@ -1081,25 +1081,25 @@ public function view_all_tester_comment_client($id,$tested){
                             $parameter_test3 = DB::table("parameter")
                             ->where("id" , $item->pid)
                             ->get();
-    
+
                         }
                      }
-    
+
                  if(empty($parameter_test1)){
                   $parameter_test1 = "0";
                  }
                  else{
                     //  Result
                     $test_id = $id;
-                  
-    
-                    $choice_tester_test1 = DB::table("test-result")
+
+
+                    $choice_tester_test1 = DB::table("test_result")
                     ->where("employee_id" , $em_id)
                     ->where("test_id" ,$test_id)
                     ->where("method_type" , 1)
                     ->select("user_select")
                     ->get();
-    
+
                     $tester_choice = 0;
                     if($parameter_test1[0]->option2 == $choice_tester_test1[0]->user_select){
                         $tester_choice = 2;
@@ -1118,15 +1118,15 @@ public function view_all_tester_comment_client($id,$tested){
                  else{
                        //  Result
                        $test_id = $id;
-                   
-    
-                       $choice_tester_test2 = DB::table("test-result")
+
+
+                       $choice_tester_test2 = DB::table("test_result")
                        ->where("employee_id" , $em_id)
                        ->where("test_id" ,$test_id)
                        ->where("method_type" , 2)
                        ->select("user_select")
                        ->get();
-    
+
                        $tester_choice_test2 = 0;
                        if($parameter_test2[0]->option1 == $choice_tester_test2[0]->user_select){
                            $tester_choice_test2 = 1;
@@ -1151,28 +1151,28 @@ public function view_all_tester_comment_client($id,$tested){
                     ->where("employee_id", $em_id)
                     ->limit(4)
                     ->get();
-    
+
                  }
-    
+
                  if(empty($parameter_test4)){
                   $parameter_test4 = "0";
                  }else{
-                     $choice_tester_test4 = DB::table("test-result")
+                     $choice_tester_test4 = DB::table("test_result")
                      ->where("employee_id" , $em_id)
                      ->where("test_id" ,$test_id)
                      ->where("method_type" , 4)
                      ->select("option1", "option2" , "option3" ,"option4")
                      ->limit(1)
                      ->get();
-    
-    
-    
+
+
+
                 }
-    
-    
-    
+
+
+
                 $test_state = 1;
-    
+
             return view("frontend.client_tester_choice", [
                 "employee" => $employee ,
                 'test_id' => $test_id,
@@ -1184,13 +1184,13 @@ public function view_all_tester_comment_client($id,$tested){
                 'parameter_test4' => $parameter_test4,
                 'tester_choice' =>  $tester_choice,
                 'tester_choice_test2' => $tester_choice_test2,
-    
-    
+
+
                 'rating_user_choice' =>$rating_user_choice,
                 'choice_tester_test4' =>  $choice_tester_test4,
                 'test_state' => $test_state
             ]);
-        
+
     }
 }
 

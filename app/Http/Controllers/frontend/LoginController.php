@@ -18,6 +18,7 @@ class LoginController extends Controller
 
         $employees = DB::table("employee as em")
         ->select("em.id_em as idem" , "em.serial", "em.*")
+
         ->get();
         $id = $request->input("id");
         $serial = $request->input("serial");
@@ -30,11 +31,9 @@ class LoginController extends Controller
             $employee->idem = strtolower($employee->idem);
 
 
-                if($employee->idem == $id){
-                
-            
-                
-                
+                if($employee->idem == $id && $employee->idem != ''){
+
+
 
                     $test_today = DB::table("test")
                     ->where("due_date" ,today())
@@ -47,7 +46,8 @@ class LoginController extends Controller
 
                     return view("frontend.test-list",["test_today" =>$test_today,'employee' =>$employee]);
                 }
-                elseif($employee->serial == $serial){
+                elseif($employee->serial == $serial && $employee->serial != ''){
+
                     $test_today = DB::table("test")
                     ->where("due_date" ,today())
                     ->where("status" , 1)
