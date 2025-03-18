@@ -10,15 +10,15 @@
   <link rel="stylesheet" href="{{URL('assets/Css/backend.css')}}">
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  <link href="{{URL('assets/Css/bootstrap.min.css')}}" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <link rel="icon" href="{{URL('assets/image/photo_2024-01-03_10-04-12.jpg')}}" type="image/x-icon">
 
   <link rel="stylesheet" href="{{URL('assets/Css/fonts6/css/all.css')}}">
 
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <script src="{{URL('assets/JS/jquery.min.js')}}"></script>
   <title>Sensory Test</title>
 </head>
 
@@ -43,7 +43,7 @@
                 <div class="sub-right">
                   <label for="">ID</label>
                   <input type="text" class="form-control " name ="id-em" placeholder="INVXXXX" autocomplete="off">
-                  
+
                 </div>
               </div>
               <div class="row">
@@ -77,20 +77,20 @@
                   </div>
                 </div>
                 <div class="sub-right">
-          
+
                   <div class="row">
                     <div class="col-6">
                       <label for="">Department</label>
                       <select class="form-control" name="deparment" id="department2" onchange="updatedepartment2()">
-                        <option value=""></option>  
+                        <option value=""></option>
                         @if (!empty($department))
-                        <option value=""></option>  
+                        <option value=""></option>
                         @foreach ($department as $item)
-          
+
                           <option value="{{$item->name}}">{{$item->name}}</option>
                           @endforeach
                         @endif
-                        
+
                         <option value="custom">Add New</option>
                       </select>
                     </div>
@@ -102,28 +102,28 @@
                       </div>
                     </div>
                   </div>
-          
-          
+
+
                 </div>
               </div>
-          
-          
-          
+
+
+
               <div class="row">
                 <div class="full-sub">
                   <label for="">remark</label>
                   <input class="form-control" name="remark" type="text">
                 </div>
               </div>
-          
-          
+
+
               <div class="row mt-5">
                 <div class="full-sub">
                   <div class="align-right mb-3">
                     <button class="btn-submit" type="submit">Submit</button>
                   </div>
                 </div>
-          
+
               </div>
             </form>
             </div>
@@ -131,7 +131,7 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  <script src="{{URL('assets/JS/bootstrap.bundle.min.js')}}"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   <script src="{{URL('assets/JS/backend.js')}}"></script>

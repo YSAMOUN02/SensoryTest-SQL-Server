@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{{URL('assets/Css/fonts6/css/all.css')}}">
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="{{URL('assets/JS/jquery.min.js')}}"></script>
   <title>Sensory Test</title>
 </head>
 
@@ -31,7 +31,7 @@
     <div class="expand-nav">
       <button onclick="expand_nav()" ><i class="fa-solid fa-arrows-left-right"></i></button>
     </div>
-    
+
     <div class="blur">
         <div class="mid">
           <div class="spinner-border text-secondary" role="status">
@@ -39,7 +39,7 @@
           </div>
           <span>Loadding...</span>
         </div>
-      
+
     </div>
     @if (Session::has("no_test"))
           <div class="aler_fail" style="display: block;
@@ -125,7 +125,7 @@
           <a href="/admin/view/admin">
             <div class="sub-box">
               <div class="box-item">
-               
+
                 <i class="fa fa-user-circle" aria-hidden="true"></i><span>View Admin</span>
               </div>
             </div>
@@ -179,7 +179,7 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  <script src="{{URL('assets/JS/bootstrap.bundle.min.js')}}"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
