@@ -23,17 +23,20 @@ class EmployeeController extends Controller
         foreach($employee as $item){
             $item->dob = $this->calculateAge($item->dob);
         }
-       
 
-        
+
+
     //    var_dump($employee);
         return view("backend.view-employee", ['employee' => $employee]);
 
     }
 
     public function add_employee_submit(Request $request){
-        
+
+
+        // Staff Only
         if( $request->input("level") == 1){
+
             $department ="";
             if($request->input("department-state") == 0){
                 $department = $request->input("deparment");
@@ -44,8 +47,6 @@ class EmployeeController extends Controller
                     'created_at' => today()
                 ]);
             }
-
-
             $insert = DB::table("employee")->insert([
                 'id_em' => $request->input("id_em"),
                 'serial' => $request->input("serial"),
@@ -56,14 +57,17 @@ class EmployeeController extends Controller
                 'remark' => $request->input("remark"),
                 'created_at' => today()
             ]);
+
+
+            
             if($request->input("state-test") == 1){
                 return redirect("/admin/view/employee")->with("message-success","Added 1 Tester");
             }else{
                 return redirect("/login")->with("message-success","Register Success.");
             }
-            
+
         }else{
-     
+
             $department ="";
             if($request->input("department-state") == 0){
                 $department = $request->input("deparment");
@@ -102,14 +106,14 @@ class EmployeeController extends Controller
         if($delete){
             return redirect("/admin/view/employee")->with("message-success","Delete Success.");
         }else{
-            
+
             return redirect("/admin/view/employee")->with("message-fail","Opp! Operation Fail.");
         }
 
     }
 
     public function update_employee(Request $request){
-        
+
         $employee  = DB::table("employee")
         ->select("id_em as idem" , "employee.*")
         ->where("id" , $request->id)
@@ -134,9 +138,9 @@ class EmployeeController extends Controller
                     'name' => $department,
                     'created_at' => today()
                 ]);
-    
+
         }
-   
+
 
         $update = DB::table("employee")
         ->where('id',$request->input("id"))
