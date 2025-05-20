@@ -71,7 +71,7 @@
                       <label for="">Level</label>
                       <select class="form-control" name="level" id="" >
                         <option value="1">Tester</option>
-                        <option value="2">Admin</option>
+
                       </select>
                     </div>
                   </div>
