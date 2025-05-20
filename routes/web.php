@@ -125,4 +125,5 @@ Route::get('/view/tester/comment/id={id}/tested={tested}', [TestingControll ::cl
 
 Route::get('/view/tester/choice/id={id}/tested={tested}/em={em_id}', [TestingControll ::class, 'teser_choice_client']);
 
+Route::post('/add/employee/submit', [EmployeeController ::class, 'add_employee_submit']);
 

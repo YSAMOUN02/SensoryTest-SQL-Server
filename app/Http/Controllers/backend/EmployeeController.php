@@ -5,7 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\employee;
+use App\Models\User;
 class EmployeeController extends Controller
 {
     public function add_employee() {
@@ -33,7 +34,6 @@ class EmployeeController extends Controller
 
     public function add_employee_submit(Request $request){
 
-
         // Staff Only
         if( $request->input("level") == 1){
 
@@ -47,21 +47,24 @@ class EmployeeController extends Controller
                     'created_at' => today()
                 ]);
             }
-            $insert = DB::table("employee")->insert([
-                'id_em' => $request->input("id_em"),
-                'serial' => $request->input("serial"),
-                'name' => $request->input("name"),
-                'department' => $department,
-                'dob' => $request->input("age"),
-                'position' => $request->input('position'),
-                'remark' => $request->input("remark"),
-                'created_at' => today()
-            ]);
+            $employee = new employee();
+            $employee->id_em = $request->input("id_em");
+            $employee->serial = $request->input("serial");
+            $employee->name = $request->input("name");
+            $employee->department = $department;
+            $employee->dob = $request->input("age");
+            $employee->position = $request->input('position');
+            $employee->remark = $request->input("remark");
+            $employee->created_at = today();
+            $employee->save();
+            $employee->test_time = 0;
+            $save = $employee->save();
 
 
-            
-            if($request->input("state-test") == 1){
-                return redirect("/admin/view/employee")->with("message-success","Added 1 Tester");
+
+
+            if($save){
+                return redirect("/login")->with("message-success","Added 1 Tester");
             }else{
                 return redirect("/login")->with("message-success","Register Success.");
             }
@@ -78,19 +81,22 @@ class EmployeeController extends Controller
                     'created_at' => today()
                 ]);
             }
+            // return User::get();
 
 
-            $insert = DB::table("users")->insert([
-                'idem' => $request->input("id_em"),
-                'serail' => $request->input("serial"),
-                'name' => $request->input("name"),
-                'department' => $department,
-                'dob' => $request->input("age"),
-                'position' => $request->input('position'),
-                'password' => bcrypt($request->input("password")),
-                'remark' => $request->input("remark"),
-                'created_at' => today()
-            ]);
+                $new_user = new User();
+                $new_user->idem = $request->input("id_em");
+                $new_user->serail = $request->input("serial");
+                $new_user->name = $request->input("name");
+                $new_user->department = $department;
+                $new_user->dob = $request->input("age");
+                $new_user->position = $request->input('position');
+                $new_user->password = bcrypt($request->input("password"));
+                $new_user->remark = $request->input("remark");
+                $new_user->created_at = today();
+                $new_user->save();
+                $insert = $new_user->save();
+
             if($insert){
                 return redirect("/admin/view/admin")->with("message-success","Added 1 admin");
             }else{

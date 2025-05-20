@@ -7,18 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="{{URL('assets/Css/backend.css')}}">
+  <link rel="stylesheet" href="<?php echo e(URL('assets/Css/backend.css')); ?>">
 
   <!-- Bootstrap CSS -->
-  <link href="{{URL('assets/Css/bootstrap.min.css')}}" rel="stylesheet"
+  <link href="<?php echo e(URL('assets/Css/bootstrap.min.css')); ?>" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-  <link rel="icon" href="{{URL('assets/image/photo_2024-01-03_10-04-12.jpg')}}" type="image/x-icon">
+  <link rel="icon" href="<?php echo e(URL('assets/image/photo_2024-01-03_10-04-12.jpg')); ?>" type="image/x-icon">
 
-  <link rel="stylesheet" href="{{URL('assets/Css/fonts6/css/all.css')}}">
+  <link rel="stylesheet" href="<?php echo e(URL('assets/Css/fonts6/css/all.css')); ?>">
 
 
-  <script src="{{URL('assets/JS/jquery.min.js')}}"></script>
+  <script src="<?php echo e(URL('assets/JS/jquery.min.js')); ?>"></script>
   <title>Sensory Test</title>
 </head>
 
@@ -33,7 +33,7 @@
       <div class="dashboard-body">
         <div class="dashboard-body-sub2">
           <form action="/add/employee/submit" method="POST">
-            @csrf
+            <?php echo csrf_field(); ?>
               <input type="text" name="state-test" value="0" class="d-none">
               <div class="row mt-5">
                 <div class="sub-left">
@@ -83,13 +83,13 @@
                       <label for="">Department</label>
                       <select class="form-control" name="deparment" id="department2" onchange="updatedepartment2()">
                         <option value=""></option>
-                        @if (!empty($department))
+                        <?php if(!empty($department)): ?>
                         <option value=""></option>
-                        @foreach ($department as $item)
+                        <?php $__currentLoopData = $department; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                          <option value="{{$item->name}}">{{$item->name}}</option>
-                          @endforeach
-                        @endif
+                          <option value="<?php echo e($item->name); ?>"><?php echo e($item->name); ?></option>
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
 
                         <option value="custom">Add New</option>
                       </select>
@@ -131,12 +131,13 @@
     </div>
   </div>
 
-  <script src="{{URL('assets/JS/bootstrap.bundle.min.js')}}"
+  <script src="<?php echo e(URL('assets/JS/bootstrap.bundle.min.js')); ?>"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-  <script src="{{URL('assets/JS/backend.js')}}"></script>
+  <script src="<?php echo e(URL('assets/JS/backend.js')); ?>"></script>
 
 
 </body>
 
 </html>
+<?php /**PATH C:\Users\itsupport1\Desktop\Project_Website\Project\SensoryTest-SQL-Server\resources\views/frontend/add-employee.blade.php ENDPATH**/ ?>
